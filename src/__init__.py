@@ -1,8 +1,8 @@
 # Copyright (c) 2009-2024 The Regents of the University of Michigan.
 # Part of HOOMD-blue, released under the BSD 3-Clause License.
 
-"""Template HOOMD-blue component."""
-# TODO: Document your component.
+"""Example python module."""
 
-# TODO: Import all Python modules in your component.
-from . import version
+from hoomd.pair_plugin import pair
+
+__all__ = ["pair"]
