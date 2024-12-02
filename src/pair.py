@@ -4,12 +4,12 @@
 """Example pair potential."""
 
 # Import the C++ module.
-from hoomd.template import _template
+from hoomd.data.parameterdicts import TypeParameterDict
+from hoomd.data.typeparam import TypeParameter
 
 # Import the hoomd Python package and other necessary components.
 from hoomd.md import pair
-from hoomd.data.parameterdicts import TypeParameterDict
-from hoomd.data.typeparam import TypeParameter
+from hoomd.template import _template
 
 
 class ExamplePair(pair.Pair):
@@ -17,14 +17,14 @@ class ExamplePair(pair.Pair):
 
     # set static class data
     _ext_module = _template
-    _cpp_class_name = "PotentialPairExample"
-    _accepted_modes = ("none", "shift", "xplor")
+    _cpp_class_name = 'PotentialPairExample'
+    _accepted_modes = ('none', 'shift', 'xplor')
 
-    def __init__(self, nlist, default_r_cut=None, default_r_on=0.0, mode="none"):
+    def __init__(self, nlist, default_r_cut=None, default_r_on=0.0, mode='none'):
         super().__init__(nlist, default_r_cut, default_r_on, mode)
         params = TypeParameter(
-            "params",
-            "particle_types",
+            'params',
+            'particle_types',
             TypeParameterDict(k=float, sigma=float, len_keys=2),
         )
         self._add_typeparam(params)

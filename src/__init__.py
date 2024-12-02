@@ -5,4 +5,4 @@
 
 from hoomd.pair_plugin import pair
 
-__all__ = ["pair"]
+__all__ = ['pair']
