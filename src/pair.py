@@ -4,9 +4,9 @@
 """Example pair potential."""
 
 # Import the C++ module.
-from hoomd.pair_plugin import _pair_plugin
+from hoomd.template import _template
 
-# Impot the hoomd Python package and other necessary components.
+# Import the hoomd Python package and other necessary components.
 from hoomd.md import pair
 from hoomd.data.parameterdicts import TypeParameterDict
 from hoomd.data.typeparam import TypeParameter
@@ -16,7 +16,7 @@ class ExamplePair(pair.Pair):
     """Example pair potential."""
 
     # set static class data
-    _ext_module = _pair_plugin
+    _ext_module = _template
     _cpp_class_name = "PotentialPairExample"
     _accepted_modes = ("none", "shift", "xplor")
 
