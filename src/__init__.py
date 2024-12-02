@@ -4,5 +4,7 @@
 """Template HOOMD-blue component."""
 # TODO: Document your component.
 
-# TODO: Import all Python modules in your component.
 from . import version
+from .pair import ExamplePair
+
+__all__ = ['ExamplePair']

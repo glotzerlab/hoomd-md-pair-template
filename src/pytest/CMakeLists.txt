@@ -1,6 +1,6 @@
 # TODO: List all pytest files in test_files.
 set(test_files __init__.py
-          test_version.py
+          test_example_pair.py
     )
 
 # Copy tests to the install directory.
