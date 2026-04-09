@@ -36,7 +36,7 @@ jobs:
           echo "name=${{ github.event.repository.name }}-${VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: true
           path: ${{ steps.version.outputs.name }}
@@ -50,7 +50,7 @@ jobs:
         run: tar --zstd -cvf ${{ steps.version.outputs.name }}.tar.zst ${{ steps.version.outputs.name }}
 
       - name: Create release
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           files: "*.tar.zst"
