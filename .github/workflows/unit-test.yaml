@@ -9,7 +9,7 @@ env:
 
   #############################################################################################
   # HOOMD-blue version to build.
-  HOOMD_BLUE_VERSION: v7.0.1
+  HOOMD_BLUE_VERSION: v7.1.0
   # prevent deadlocked MPI tests from causing the job to cancel
   MPIEXEC_TIMEOUT: 3000
   # allow mpirun to execute as root in the tests
@@ -41,7 +41,7 @@ jobs:
     name: Build and test [${{ matrix.name }}]
     runs-on: ubuntu-24.04
     container:
-      image: nvidia/cuda:12.9.1-devel-ubuntu22.04@sha256:bd4e2680a261c212f1e2fea241606f71497dc67a417f73175d794ec8212b5ba8
+      image: nvidia/cuda:12.9.2-devel-ubuntu22.04@sha256:e0203e3a0d3d02b05f4210867b973b7f48997c71bc99b994f2bd350ee60f77a1
     strategy:
       fail-fast: false
       matrix:
@@ -61,12 +61,12 @@ jobs:
 
     steps:
     - name: Checkout component
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       with:
         path: component
     - name: Restore cached HOOMD-blue build
       id: cache
-      uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5
+      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
       with:
         path: install
         key: hoomd-blue-${{ env.HOOMD_BLUE_VERSION }}-${{ matrix.enable_mpi }}-gpu-${{ matrix.enable_gpu }}
@@ -75,16 +75,16 @@ jobs:
         apt-get update
         apt-get install git --yes
     - name: Checkout HOOMD-blue
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       with:
         repository: glotzerlab/hoomd-blue
         path: hoomd-blue
         submodules: true
         ref: ${{ env.HOOMD_BLUE_VERSION }}
     - name: Create Python Environment
-      uses: prefix-dev/setup-pixi@1b2de7f3351f171c8b4dfeb558c639cb58ed4ec0 # v0.9.5
+      uses: prefix-dev/setup-pixi@5185adfbffb4bd703da3010310260805d89ebb11 # v0.9.6
       with:
-        pixi-version: v0.54.1
+        pixi-version: v0.69.0
         cache: false
         activate-environment: true
         manifest-path: component/pixi.toml
@@ -114,7 +114,7 @@ jobs:
       working-directory: build-hoomd-blue
     - name: Cache HOOMD-blue build
       if: steps.cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5
+      uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
       with:
         path: install
         key: hoomd-blue-${{ env.HOOMD_BLUE_VERSION }}-${{ matrix.enable_mpi }}-gpu-${{ matrix.enable_gpu }}
