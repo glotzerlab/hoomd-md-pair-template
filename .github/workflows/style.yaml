@@ -13,7 +13,7 @@ on:
 
 jobs:
   prek:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
@@ -32,7 +32,7 @@ jobs:
     name: All style checks
     if: always()
     needs: [prek]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
     - run: jq --exit-status 'all(.result == "success")' <<< '${{ toJson(needs) }}'

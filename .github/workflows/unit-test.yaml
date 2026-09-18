@@ -39,7 +39,7 @@ defaults:
 jobs:
   build_test:
     name: Build and test [${{ matrix.name }}]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       image: nvidia/cuda:12.9.2-devel-ubuntu22.04@sha256:e0203e3a0d3d02b05f4210867b973b7f48997c71bc99b994f2bd350ee60f77a1
     strategy:
